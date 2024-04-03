@@ -12,9 +12,47 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { red } from '@mui/material/colors';
+import { Box, Slider } from '@mui/material';
+
 
 function App() {
-
+  const marks = [
+    {
+      value: 0,
+      label: '|',
+    }
+    ,
+    {
+      value: 5,
+      label: '|',
+    },
+    {
+      value: 10,
+      label: '|',
+    },
+    {
+      value: 20,
+      label: '|',
+    },
+    {
+      value: 37,
+      label: '|',
+    },
+    {
+      value: 100,
+      label: '|',
+    },
+  ];
+  
+  // Функции для отображения меток у рандж измения наклона
+  function valuetext(value) {
+    return `|`;
+  }
+  
+  function valueLabelFormat(value) {
+    // Здесь нужно прописать корректировку чтобы отображались значения с минусом
+    return marks.findIndex((mark) => mark.value === value) + 1;
+  }
   return (
     <>
     {/* Шапка */}
@@ -104,6 +142,21 @@ function App() {
           '&.Mui-checked': {
             color: '#FF0000'}
          }}/>} label="Стены" />
+        </div>
+        <div className='container__param uncle'>
+        <Typography>Х</Typography>
+          <Box sx={{ width: 236-28 }}> 
+          <Slider
+        color={'#ff0000'}
+        defaultValue={80}
+        getAriaValueText={valuetext}
+        step={5}
+        valueLabelDisplay="auto"
+        marks={marks}
+        max={80}
+        track={false}
+      />
+      </Box>
         </div>
   </div>
   

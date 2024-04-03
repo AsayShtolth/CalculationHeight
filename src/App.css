@@ -4,7 +4,33 @@
   /* padding: 2rem; */
   text-align: center;
 }
-
+ .MuiSelect-icon{
+  color: #ff0000 !important;
+}
+.css-bxntsz-MuiSlider-root{
+  height: 1px !important;
+  margin-bottom: 0 !important;
+}
+.MuiSlider-thumb{
+  color: #ff0000 !important;
+  width: 8px !important;
+  height: 8px !important;
+}
+.MuiSlider-rail{
+  background-color: black !important;
+  height: 0.5px !important;
+  opacity: 100 !important;
+  top: 12px !important;
+}
+.MuiSlider-mark{
+  height: 0px !important;
+  width: 0px !important;
+}
+.MuiSlider-markLabel{
+  font-size: 8px !important;
+  top: 20px !important;
+  color: #00000080 !important;
+}
 
 a{
   color: white;
@@ -48,6 +74,12 @@ a{
   display: flex;
   gap: 12px;
   align-items: center;
+}
+.uncle{
+  border: 1px solid #3333334D;
+  padding: 8px;
+  align-items: center;
+  max-height: 32px;
 }
 @media (max-width:900px) {
   .container{
