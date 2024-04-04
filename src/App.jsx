@@ -20,8 +20,11 @@ function App() {
     {
       value: 0,
       label: '|',
-    }
-    ,
+    },
+    {
+      value: 15,
+      label: '|',
+    },
     {
       value: 5,
       label: '|',
@@ -35,11 +38,52 @@ function App() {
       label: '|',
     },
     {
-      value: 37,
+      value: 25,
+      label: '|',
+    }
+    ,
+    {
+      value: 30,
       label: '|',
     },
     {
-      value: 100,
+      value: 35,
+      label: '|',
+    },
+    {
+      value: 40,
+      label: '|',
+    },
+        {
+      value: 45,
+      label: '|',
+    },
+        {
+      value: 50,
+      label: '|',
+    },
+        {
+      value: 55,
+      label: '|',
+    },
+        {
+      value: 60,
+      label: '|',
+    },
+        {
+      value: 65,
+      label: '|',
+    },
+        {
+      value: 70,
+      label: '|',
+    },
+        {
+      value: 75,
+      label: '|',
+    },
+        {
+      value: 80,
       label: '|',
     },
   ];
@@ -137,18 +181,21 @@ function App() {
           <input type='number' id='height' className="params__height__input"></input>
         </FormControl>
         </div>
-        <div className="container__param">
+                <div className="container__param">
          <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 }, 
           '&.Mui-checked': {
             color: '#FF0000'}
          }}/>} label="Стены" />
         </div>
+  </div>
+  <Typography>Наклон камеры X:0; Y:0</Typography>
+  <div className='container__params'>
         <div className='container__param uncle'>
         <Typography>Х</Typography>
           <Box sx={{ width: 236-28 }}> 
           <Slider
         color={'#ff0000'}
-        defaultValue={80}
+        defaultValue={40}
         getAriaValueText={valuetext}
         step={5}
         valueLabelDisplay="auto"
@@ -158,8 +205,22 @@ function App() {
       />
       </Box>
         </div>
-  </div>
-  
+        <div className='container__param uncle'>
+        <Typography>Y</Typography>
+          <Box sx={{ width: 236-28 }}> 
+          <Slider
+        color={'#ff0000'}
+        getAriaValueText={valuetext}
+        defaultValue={40}
+        step={5}
+        valueLabelDisplay="auto"
+        marks={marks}
+        max={80}
+        track={false}
+      />
+      </Box>
+        </div>
+        </div>
 </div>
 
     </>

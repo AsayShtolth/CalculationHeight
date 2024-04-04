@@ -7,7 +7,7 @@
  .MuiSelect-icon{
   color: #ff0000 !important;
 }
-.css-bxntsz-MuiSlider-root{
+.MuiSlider-root{
   height: 1px !important;
   margin-bottom: 0 !important;
 }
@@ -29,7 +29,7 @@
 .MuiSlider-markLabel{
   font-size: 8px !important;
   top: 20px !important;
-  color: #00000080 !important;
+  color: black !important;
 }
 
 a{
@@ -79,7 +79,8 @@ a{
   border: 1px solid #3333334D;
   padding: 8px;
   align-items: center;
-  max-height: 32px;
+  max-height: 35px;
+  width: 236px;
 }
 @media (max-width:900px) {
   .container{
