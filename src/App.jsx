@@ -12,7 +12,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { red } from '@mui/material/colors';
-import { Box, Slider } from '@mui/material';
+import { Box, Slider, TextField } from '@mui/material';
+import { Label } from '@mui/icons-material';
 
 
 function App() {
@@ -187,8 +188,11 @@ function App() {
             color: '#FF0000'}
          }}/>} label="Стены" />
         </div>
+        <Box sx={{ width: '100%' }}> 
+        <Typography>Наклон камеры X:0; Y:0</Typography>
+        </Box>
   </div>
-  <Typography>Наклон камеры X:0; Y:0</Typography>
+  
   <div className='container__params'>
         <div className='container__param uncle'>
         <Typography>Х</Typography>
@@ -221,6 +225,19 @@ function App() {
       </Box>
         </div>
         </div>
+        <div className='container__params'>
+<div className='container__result'>
+          <Typography align={'left'} noWrap={true} sx={{fontSize: '12px'}}>Параметры левой камеры</Typography>
+          <div className='container__result__param'>
+            <Typography   sx={{marginLeft: 'auto', fontSize: '12px'} } >Ширина</Typography>
+           <input className='result__param' type='text' value={2.11} style={{fontSize: '12px'}}></input>
+            </div>
+          <div className='container__result__param'>
+          <Typography noWrap={true} sx={{marginLeft: 'auto', fontSize: '12px'} }>От левой стены</Typography>
+          <input type='text' className='result__param' style={{fontSize: '12px'}} value={1.9}></input>
+          </div>
+        </div>
+</div>
 </div>
 
     </>
