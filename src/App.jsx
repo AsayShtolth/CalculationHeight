@@ -1,92 +1,62 @@
 
 import './App.css'
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import HomeIcon from '@mui/icons-material/Home';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { red } from '@mui/material/colors';
-import { Box, Slider, TextField } from '@mui/material';
-import { Label } from '@mui/icons-material';
+import { Box, Slider} from '@mui/material';
+import Header from './components/Header/Header';
+import SelectRed from './components/SelectRed/SelectRed';
+import { useState } from 'react';
+import RangeAngle from './components/RangeAngle/RangeAngle';
 
+  
 
 function App() {
+  const devices=[
+    'BrickStream', 'RStat Real 3D', 'RStat Real 2D/Light', 'RStat RealStereo', 'RStat RealStereo Low',
+    'RStat RealStereo Hight', 'Stereosensor 3D', 'VIDEOCAMERA 3D 2.8', 'VIDEOCAMERA 3D 3.6',
+    'Xovis PC2S', 'Xovis PC3', 'RStat Real 2D/Light от 5.21', 'RStat RealStereo от 5.21',
+    'RStat RealStereo 2.0', 'RStat Real 2D 3.0/Light 4.0'
+  ]
+  const zooms=[3,6,9];
+
+  const [device, setDevice] = useState(devices[0]);
+  const [zoom, setZoom] = useState(zooms[0]);
+  const [xAngle, setXAngle] = useState(40);
+  const [yAngle, setYAngle] = useState(40);
+
+  const handleChangeDevice = (event) => {
+    setDevice(event.target.value);
+  };
+
+  const handleChangeZoom = (event) => {
+    setZoom(event.target.value);
+  };
+    const handleChangeXAngle = (event) => {
+    setXAngle(event.target.value);
+  };
+    const handleChangeYAngle = (event) => {
+    setYAngle(event.target.value);
+  };
   const marks = [
-    {
-      value: 0,
-      label: '|',
-    },
-    {
-      value: 15,
-      label: '|',
-    },
-    {
-      value: 5,
-      label: '|',
-    },
-    {
-      value: 10,
-      label: '|',
-    },
-    {
-      value: 20,
-      label: '|',
-    },
-    {
-      value: 25,
-      label: '|',
-    }
-    ,
-    {
-      value: 30,
-      label: '|',
-    },
-    {
-      value: 35,
-      label: '|',
-    },
-    {
-      value: 40,
-      label: '|',
-    },
-        {
-      value: 45,
-      label: '|',
-    },
-        {
-      value: 50,
-      label: '|',
-    },
-        {
-      value: 55,
-      label: '|',
-    },
-        {
-      value: 60,
-      label: '|',
-    },
-        {
-      value: 65,
-      label: '|',
-    },
-        {
-      value: 70,
-      label: '|',
-    },
-        {
-      value: 75,
-      label: '|',
-    },
-        {
-      value: 80,
-      label: '|',
-    },
+    {value: 0,label: '|',},
+    {value: 5,label: '|',},
+    {value: 10,label: '|',},
+    {value: 15,label: '|',},
+    {value: 20,label: '|',},
+    {value: 25,label: '|',},
+    {value: 30,label: '|',},
+    {value: 35,label: '|',},
+    {value: 40,label: '|',},
+    {value: 45,label: '|',},
+    {value: 50,label: '|',},
+    {value: 55,label: '|',},
+    {value: 60,label: '|',},
+    {value: 65,label: '|',},
+    {value: 70,label: '|',},
+    {value: 75,label: '|',},
+    {value: 80,label: '|',},
   ];
   
   // Функции для отображения меток у рандж измения наклона
@@ -94,87 +64,29 @@ function App() {
     return `|`;
   }
   
-  function valueLabelFormat(value) {
-    // Здесь нужно прописать корректировку чтобы отображались значения с минусом
-    return marks.findIndex((mark) => mark.value === value) + 1;
-  }
   return (
     <>
-    {/* Шапка */}
-      <AppBar position="static"
-        sx={{backgroundColor:'#FF0000',
-        marginBottom:'49px'}}
-      >
-        <Toolbar>
-          <a href='https://support.antivor.ru/'>
-          <IconButton
-            size="small"
-            edge="start"
-            color="inherit"
-            aria-label="home"
-            sx={{ mr: 2 }}
-          >
-            <HomeIcon />
-
-          </IconButton>
-          </a>
-          <Typography  component="div" sx={{ flexGrow: 1, fontSize: 20 }}>
-            Калькулятор  высот
-          </Typography>
-          <a href='https://support.antivor.ru/pages/faq.php'>
-          <IconButton
-            size="small"
-            edge="start"
-            color="inherit"
-            aria-label="faq"
-            sx={{ mr: 2 }}
-          >
-            <QuestionMarkIcon />
-          </IconButton>
-          </a>
-        </Toolbar>
-      </AppBar>
+    <Header/>
 
 <div className='container'>
   <div className='container__params'>
     <div className='container__param'>
     <label htmlFor='device' className='content__label content__label_large'><b>Устройство</b></label>
-     {/* Select */}
-       <FormControl fullWidth>
-        <Select
-        id='device'
-        IconComponent={KeyboardArrowDownIcon}
-          defaultValue={30}
-          sx={{
-            maxHeight:'28px',
-            width:'210px',
-            fontSize:'14px',
-          }}
-        >
-          <option value={10}>Ten</option>
-          <option value={20}>Twenty</option>
-          <option value={30}>Thirty</option>
-        </Select> 
-        </FormControl>
+     <SelectRed 
+     value={device}
+     handle={handleChangeDevice}
+     id={'device'}
+     options={devices}
+     width={'210px'}/>
         </div>
         <div className='container__param'>
         <label htmlFor='zoom' className='content__label'><b>CaptureZoom</b></label>
-         <FormControl fullWidth>
-        <Select
-        id='zoom'
-        IconComponent={KeyboardArrowDownIcon}
-          defaultValue={3}
-          sx={{
-            height:'28px',
-            width:'60px',
-            fontSize:'14px',
-          }}
-        >
-          <option value={3}>3</option>
-          <option value={6}>6</option>
-          <option value={10}>10</option>
-        </Select> 
-        </FormControl>
+      <SelectRed 
+        value={zoom}
+        handle={handleChangeZoom}
+        id={'zoom'}
+         options={zooms}
+         width={'60px'}/>
         </div>
         <div className='container__param'>
         <label htmlFor='height' className='content__label'><b>Высота</b></label>
@@ -189,40 +101,28 @@ function App() {
          }}/>} label="Стены" />
         </div>
         <Box sx={{ width: '100%' }}> 
-        <Typography>Наклон камеры X:0; Y:0</Typography>
+        <Typography>Наклон камеры X:{xAngle-40}; Y:{yAngle-40}</Typography>
         </Box>
   </div>
   
   <div className='container__params'>
         <div className='container__param uncle'>
         <Typography>Х</Typography>
-          <Box sx={{ width: 236-28 }}> 
-          <Slider
-        color={'#ff0000'}
-        defaultValue={40}
-        getAriaValueText={valuetext}
-        step={5}
-        valueLabelDisplay="auto"
-        marks={marks}
-        max={80}
-        track={false}
-      />
-      </Box>
+          <RangeAngle
+          valuetext={valuetext}
+          marks={marks}
+          value={xAngle}
+          handle={handleChangeXAngle}
+          />
         </div>
         <div className='container__param uncle'>
         <Typography>Y</Typography>
-          <Box sx={{ width: 236-28 }}> 
-          <Slider
-        color={'#ff0000'}
-        getAriaValueText={valuetext}
-        defaultValue={40}
-        step={5}
-        valueLabelDisplay="auto"
-        marks={marks}
-        max={80}
-        track={false}
-      />
-      </Box>
+         <RangeAngle
+         valuetext={valuetext}
+          marks={marks}
+          value={yAngle}
+          handle={handleChangeYAngle}
+         />
         </div>
         </div>
         <div className='container__params'>
@@ -230,11 +130,11 @@ function App() {
           <Typography align={'left'} noWrap={true} sx={{fontSize: '12px'}}>Параметры левой камеры</Typography>
           <div className='container__result__param'>
             <Typography   sx={{marginLeft: 'auto', fontSize: '12px'} } >Ширина</Typography>
-           <input className='result__param' type='text' value={2.11} style={{fontSize: '12px'}}></input>
+           <input className='result__param' type='text' value={2.11} style={{fontSize: '12px'}} disabled></input>
             </div>
           <div className='container__result__param'>
-          <Typography noWrap={true} sx={{marginLeft: 'auto', fontSize: '12px'} }>От левой стены</Typography>
-          <input type='text' className='result__param' style={{fontSize: '12px'}} value={1.9}></input>
+          <Typography noWrap={true} sx={{marginLeft: 'auto', fontSize: '12px'} } >От левой стены</Typography>
+          <input type='text' className='result__param' style={{fontSize: '12px'}} value={1.9} disabled></input>
           </div>
         </div>
 </div>
