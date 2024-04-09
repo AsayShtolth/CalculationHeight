@@ -4,11 +4,13 @@ import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Box, Slider} from '@mui/material';
+import { Box} from '@mui/material';
 import Header from './components/Header/Header';
 import SelectRed from './components/SelectRed/SelectRed';
 import { useState } from 'react';
 import RangeAngle from './components/RangeAngle/RangeAngle';
+import Chart from './components/Chart/Chart';
+// import Canvas from './components/Chart/canvas';
 
   
 
@@ -60,7 +62,7 @@ function App() {
   ];
   
   // Функции для отображения меток у рандж измения наклона
-  function valuetext(value) {
+  function valuetext() {
     return `|`;
   }
   
@@ -125,6 +127,7 @@ function App() {
          />
         </div>
         </div>
+        <Chart></Chart>
         <div className='container__params'>
 <div className='container__result'>
           <Typography align={'left'} noWrap={true} sx={{fontSize: '12px'}}>Параметры левой камеры</Typography>

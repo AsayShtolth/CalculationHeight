@@ -53,6 +53,9 @@ input:disabled{
   background-color: #FFFFFF;
   border: 1px solid #3333334D;
 }
+canvas {
+  /* border: 1px solid black; */
+}
 .container{
   max-width: 600px;
   box-sizing: border-box;
