@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const Chart = () => {
+const Chart = (props) => {
 	useEffect(()=>{
 		const canvas = document.getElementById("tutorial");
 		if (canvas.getContext) {
@@ -61,6 +61,11 @@ ctx.beginPath();
  ctx.lineTo(300, 360);
  ctx.stroke();
   ctx.closePath();
+//   Отрисовка сенсора - заменить на картинку
+   ctx.beginPath();
+   ctx.fillStyle = 'red';
+   ctx.arc(300,180, 5, 0, 2 * Math.PI);
+   ctx.fill();
         }
 	}, []);
 

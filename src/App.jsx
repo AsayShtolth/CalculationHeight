@@ -127,7 +127,9 @@ function App() {
          />
         </div>
         </div>
-        <Chart></Chart>
+        <Chart
+        xAngle={xAngle}
+        yAngle={yAngle}></Chart>
         <div className='container__params'>
 <div className='container__result'>
           <Typography align={'left'} noWrap={true} sx={{fontSize: '12px'}}>Параметры левой камеры</Typography>
