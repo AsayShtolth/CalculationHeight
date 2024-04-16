@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 const Chart = (props) => {
+
 	useEffect(()=>{
 		const canvas = document.getElementById("tutorial");
 		if (canvas.getContext) {
@@ -12,7 +13,7 @@ const Chart = (props) => {
 // Но нужно ее сделать в качестве перебора
  ctx.setLineDash([0, 0]);
 ctx.strokeStyle = "gray";
- ctx.lineWidth = 0.3;
+ ctx.lineWidth = 0.2;
  for (let i=0; i<360; i=i+20){
  	ctx.beginPath();
  ctx.moveTo(0, i);
@@ -29,16 +30,16 @@ ctx.strokeStyle = "gray";
  }
   for (let i=200; i<590; i=i+200){
 	ctx.strokeStyle = "black";
-	ctx.lineWidth = 0.7;
-ctx.beginPath();
- ctx.moveTo(i, 0);
- ctx.lineTo(i, 590);
- ctx.stroke();
- ctx.closePath();
+	ctx.lineWidth = 0.3;
+	ctx.beginPath();
+ 	ctx.moveTo(i, 0);
+ 	ctx.lineTo(i, 590);
+ 	ctx.stroke();
+ 	ctx.closePath();
  }
  for (let i=200; i<360; i=i+200){
 		ctx.strokeStyle = "black";
-ctx.lineWidth = 0.7;
+ctx.lineWidth = 0.3;
 ctx.beginPath();
  ctx.moveTo(0, i);
  ctx.lineTo(600, i);
@@ -47,27 +48,56 @@ ctx.beginPath();
  }
 //Ось наклона по У
  ctx.beginPath();
- ctx.lineWidth = 1;
- ctx.setLineDash([10, 10]);
+ ctx.lineWidth = 0.7;
+ ctx.setLineDash([12, 12]);
  ctx.moveTo(0, 180);
  ctx.lineTo(600, 180);
  ctx.stroke();
   ctx.closePath();
 // Ось наклона по Х
   ctx.beginPath();
- ctx.lineWidth = 1;
- ctx.setLineDash([10, 10]);
+ ctx.lineWidth = 0.7;
+ ctx.setLineDash([12, 12]);
  ctx.moveTo(300, 0);
  ctx.lineTo(300, 360);
  ctx.stroke();
   ctx.closePath();
-//   Отрисовка сенсора - заменить на картинку
-   ctx.beginPath();
-   ctx.fillStyle = 'red';
-   ctx.arc(300,180, 5, 0, 2 * Math.PI);
-   ctx.fill();
+//   Отрисовка самого сенсора
+   var image = new Image();
+    image.src = "./deviceIcon.svg";
+    image.onload = function() { 
+	ctx.drawImage(image, 300-52/2, 180-30/2);  
+      };
+      ctx.drawImage(image, 300-52/2, 180-30/2);
+	//   красный квадрат
+	ctx.beginPath();
+	ctx.lineWidth = '1';
+	ctx.setLineDash([0, 0]);
+	ctx.strokeStyle = "red";
+	ctx.moveTo(180, 80);
+	ctx.lineTo(420, 80);
+	ctx.lineTo(420, 280);
+	ctx.lineTo(180, 280);
+	ctx.lineTo(180, 80);
+	ctx.stroke();
+	ctx.closePath();
+	// черные диагонали
+	ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.moveTo(180, 80);
+	ctx.lineTo(300, 180);
+	ctx.lineTo(420, 80);
+	ctx.moveTo(300, 180);
+	ctx.lineTo(420, 280);
+	ctx.moveTo(300, 180);
+	ctx.lineTo(180, 280);
+	ctx.moveTo(300, 180);
+	ctx.lineTo(180, 280);
+	ctx.stroke();
+	ctx.closePath();
         }
 	}, []);
+
 
 	return ( <>	
 		<canvas  id="tutorial" width="590" height="360"></canvas>
