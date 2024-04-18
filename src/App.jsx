@@ -27,7 +27,10 @@ function App() {
   const [zoom, setZoom] = useState(zooms[0]);
   const [xAngle, setXAngle] = useState(40);
   const [yAngle, setYAngle] = useState(40);
-
+  // Это значение из поля от левой стены - возможно расчетное
+  const left=1;
+  // Значение из поля ширина
+  const widthDevice=2;
   const handleChangeDevice = (event) => {
     setDevice(event.target.value);
   };
@@ -129,9 +132,11 @@ function App() {
         </div>
         <Chart
         xAngle={xAngle}
-        yAngle={yAngle}></Chart>
+        yAngle={yAngle}
+        left={left}
+        widthDevice={widthDevice}></Chart>
         <div className='container__params'>
-<div className='container__result'>
+        <div className='container__result'>
           <Typography align={'left'} noWrap={true} sx={{fontSize: '12px'}}>Параметры левой камеры</Typography>
           <div className='container__result__param'>
             <Typography   sx={{marginLeft: 'auto', fontSize: '12px'} } >Ширина</Typography>
