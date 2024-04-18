@@ -45,7 +45,7 @@ ctx.beginPath();
  }
   for (let i=scale*10; i<canvas.width; i=i+(scale*10)){
 	ctx.strokeStyle = "black";
-	ctx.lineWidth = 0.3;
+	ctx.lineWidth = 0.5;
 	ctx.beginPath();
  	ctx.moveTo(i, 0);
  	ctx.lineTo(i, canvas.width);
@@ -54,7 +54,7 @@ ctx.beginPath();
  }
  for (let i=scale*10; i<canvas.height; i=i+(scale*10)){
 		ctx.strokeStyle = "black";
-ctx.lineWidth = 0.3;
+ctx.lineWidth = 0.5;
 ctx.beginPath();
  ctx.moveTo(0, i);
  ctx.lineTo(canvas.width, i);
