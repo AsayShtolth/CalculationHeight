@@ -11,7 +11,8 @@ import { useState } from 'react';
 import RangeAngle from './components/RangeAngle/RangeAngle';
 import Chart from './components/Chart/Chart';
 // import Canvas from './components/Chart/canvas';
-
+import { Points, RstatStereoLow } from './points';
+import { InputNumber } from 'primereact/inputnumber';
   
 
 function App() {
@@ -27,10 +28,8 @@ function App() {
   const [zoom, setZoom] = useState(zooms[0]);
   const [xAngle, setXAngle] = useState(40);
   const [yAngle, setYAngle] = useState(40);
-  // Это значение из поля от левой стены - возможно расчетное
-  const left=1;
-  // Значение из поля ширина
-  const widthDevice=2;
+  const [height, setHeight]= useState(2.5);
+  const point=(Points(height,RstatStereoLow));
   const handleChangeDevice = (event) => {
     setDevice(event.target.value);
   };
@@ -43,6 +42,9 @@ function App() {
   };
     const handleChangeYAngle = (event) => {
     setYAngle(event.target.value);
+  };
+    const handleChangeHeight = (event) => {
+    setHeight(event.target.value);
   };
   const marks = [
     {value: 0,label: '|',},
@@ -96,8 +98,9 @@ function App() {
         <div className='container__param'>
         <label htmlFor='height' className='content__label'><b>Высота</b></label>
         <FormControl fullWidth>
-          <input type='number' id='height' className="params__height__input"></input>
+          {/* <input type='number' id='height' className="params__height__input" step={0.1} min={2.5} onChange={handleChangeHeight} value={height}></input> */}
         </FormControl>
+         <InputNumber inputId="minmax-buttons" value={height} onValueChange={handleChangeHeight} mode="decimal" showButtons min={2.5} max={3.5} step={0.1}/>
         </div>
                 <div className="container__param">
          <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 }, 
@@ -133,18 +136,20 @@ function App() {
         <Chart
         xAngle={xAngle}
         yAngle={yAngle}
-        left={left}
-        widthDevice={widthDevice}></Chart>
+        left={point.x}
+        height={point.y}
+        widthDevice={point.x*2}
+        ></Chart>
         <div className='container__params'>
         <div className='container__result'>
           <Typography align={'left'} noWrap={true} sx={{fontSize: '12px'}}>Параметры левой камеры</Typography>
           <div className='container__result__param'>
             <Typography   sx={{marginLeft: 'auto', fontSize: '12px'} } >Ширина</Typography>
-           <input className='result__param' type='text' value={2.11} style={{fontSize: '12px'}} disabled></input>
+           <input className='result__param' type='text' value={point.x*2} style={{fontSize: '12px'}} disabled></input>
             </div>
           <div className='container__result__param'>
           <Typography noWrap={true} sx={{marginLeft: 'auto', fontSize: '12px'} } >От левой стены</Typography>
-          <input type='text' className='result__param' style={{fontSize: '12px'}} value={1.9} disabled></input>
+          <input type='text' className='result__param' style={{fontSize: '12px'}} value={point.x} disabled></input>
           </div>
         </div>
 </div>

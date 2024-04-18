@@ -11,8 +11,13 @@ const Chart = (props) => {
 			{				
 				canvas.width=350;
 			}
-		const newScale=canvas.width/(props.widthDevice*10+5);
-		console.log(props.widthDevice);
+		let newScale=canvas.width/(props.widthDevice*10+3);
+		// console.log('height '+canvas.height/(props.height*10+5));
+		// console.log('width '+canvas.width/(props.widthDevice*10+5))
+		if(newScale>=canvas.height/(props.height*10*2+3)){
+			newScale=canvas.height/(props.height*2*10+3);
+			// console.log('change'+newScale);
+		}
 		if (canvas.getContext) {
 			const ctx = canvas.getContext("2d");
 			const scale=newScale;
@@ -25,7 +30,7 @@ const Chart = (props) => {
 ctx.strokeStyle = "gray";
  ctx.lineWidth = 0.2;
  for (let i=0; i<canvas.height; i=i+scale){
- 	ctx.beginPath();
+ctx.beginPath();
  ctx.moveTo(0, i);
  ctx.lineTo(canvas.width, i);
  ctx.stroke();
@@ -60,8 +65,8 @@ ctx.beginPath();
  ctx.beginPath();
  ctx.lineWidth = 0.7;
  ctx.setLineDash([12, 12]);
- ctx.moveTo(0, canvas.height/2);
- ctx.lineTo(canvas.width, canvas.height/2);
+ ctx.moveTo(0, props.height*10*scale+scale);
+ ctx.lineTo(canvas.width, props.height*10*scale+scale);
  ctx.stroke();
   ctx.closePath();
 // Ось наклона по Х
@@ -76,37 +81,38 @@ ctx.beginPath();
    var image = new Image();
     image.src = "./deviceIcon.svg";
     image.onload = function() { 
-	ctx.drawImage(image, (props.left*10*scale)-52/2+scale, (canvas.height/2)-30/2);  
+	ctx.drawImage(image, (props.left*10*scale)-52/2+scale, props.height*10*scale+scale-30/2);  
       };
-      ctx.drawImage(image, (props.left*10*scale)-52/2+scale, (canvas.height/2)-30/2);
+      ctx.drawImage(image, (props.left*10*scale)-52/2+scale, props.height*10*scale+scale-30/2);
 	//   красный квадрат
+	console.log(props.height);
 	ctx.beginPath();
 	ctx.lineWidth = '1';
 	ctx.setLineDash([0, 0]);
 	ctx.strokeStyle = "red";
-	ctx.moveTo(scale, 80);
-	ctx.lineTo(props.widthDevice*10*scale+scale, 80);
-	ctx.lineTo(props.widthDevice*10*scale+scale, 280);
-	ctx.lineTo(scale, 280);
-	ctx.lineTo(scale, 80);
+	ctx.moveTo(scale, scale);
+	ctx.lineTo(props.widthDevice*10*scale+scale, scale);
+	ctx.lineTo(props.widthDevice*10*scale+scale, props.height*10*scale*2+scale);
+	ctx.lineTo(scale, props.height*10*scale*2+scale);
+	ctx.lineTo(scale, scale);
 	ctx.stroke();
 	ctx.closePath();
 	// черные диагонали
 	ctx.beginPath();
 	ctx.strokeStyle = "black";
-	ctx.moveTo(scale, 80);
-	ctx.lineTo(props.left*10*scale + scale, 180);
-	ctx.lineTo(props.widthDevice*10*scale+scale, 80);
-	ctx.moveTo(props.left*10*scale+scale, 180);
-	ctx.lineTo(props.widthDevice*10*scale+scale, 280);
-	ctx.moveTo(props.left*10*scale+scale, 180);
+	ctx.moveTo(scale, scale);
+	ctx.lineTo(props.left*10*scale + scale, props.height*10*scale+scale);
+	ctx.lineTo(props.widthDevice*10*scale+scale, scale);
+	ctx.moveTo(props.left*10*scale+scale, props.height*10*scale+scale);
+	ctx.lineTo(props.widthDevice*10*scale+scale, props.height*10*scale*2+scale);
+	ctx.moveTo(props.left*10*scale+scale, props.height*10*scale+scale);
 	// ctx.lineTo(scale, 280);
-	ctx.moveTo(props.left*10*scale+ scale, 180);
-	ctx.lineTo(scale, 280);
+	ctx.moveTo(props.left*10*scale+ scale, props.height*10*scale+scale);
+	ctx.lineTo(scale,props.height*10*scale*2);
 	ctx.stroke();
 	ctx.closePath();
         }
-	}, []);
+	}, [props.left, props.widthDevice, props.height]);
 
 
 	return ( <>	
