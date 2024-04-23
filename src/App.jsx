@@ -1,4 +1,3 @@
-
 import './App.css'
 import FormControl from '@mui/material/FormControl';
 import Typography from '@mui/material/Typography';
@@ -7,33 +6,97 @@ import Checkbox from '@mui/material/Checkbox';
 import { Box} from '@mui/material';
 import Header from './components/Header/Header';
 import SelectRed from './components/SelectRed/SelectRed';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import RangeAngle from './components/RangeAngle/RangeAngle';
 import Chart from './components/Chart/Chart';
-// import Canvas from './components/Chart/canvas';
-import { Points, RstatStereoLow } from './points';
+import { Points} from './points';
 import { InputNumber } from 'primereact/inputnumber';
   
 
 function App() {
+
   const devices=[
-    'BrickStream', 'RStat Real 3D', 'RStat Real 2D/Light', 'RStat RealStereo', 'RStat RealStereo Low',
-    'RStat RealStereo Hight', 'Stereosensor 3D', 'VIDEOCAMERA 3D 2.8', 'VIDEOCAMERA 3D 3.6',
-    'Xovis PC2S', 'Xovis PC3', 'RStat Real 2D/Light от 5.21', 'RStat RealStereo от 5.21',
-    'RStat RealStereo 2.0', 'RStat Real 2D 3.0/Light 4.0'
-  ]
-  const zooms=[3,6,9];
+   'RStat Real 2D/Light от 5.21','RStat RealStereo от 5.21','RStat RealStereo Low', 'Xovis PC2S', 'Xovis PC3','RStat Real 2D 3.0/Light 4.0', '3D RF']
+  const minHeights=[
+    {
+      'device':'3D RF',
+      'min':2.5,
+      'max':6
+
+    },
+    {
+      'device':'RStat Real 2D/Light от 5.21',
+      'min':3,
+      'max':8
+
+    },
+    {
+      'device':'RStat RealStereo от 5.21',
+      'min':3,
+      'max':4
+
+    },
+    {
+      'device':'RStat RealStereo Low',
+      'min':2.5,
+      'max':3.5
+
+    },
+    {
+      'device':'Xovis PC2S',
+      'min':2.5,
+      'max':6
+
+    },
+    {
+      'device':'Xovis PC3',
+      'min':6,
+      'max':14
+
+    },
+    {
+      'device':'RStat Real 2D 3.0/Light 4.0',
+      'min':2,
+      'max':7.5
+
+    },
+  ];
+  const zooms=[6,10];
 
   const [device, setDevice] = useState(devices[0]);
   const [zoom, setZoom] = useState(zooms[0]);
   const [xAngle, setXAngle] = useState(40);
   const [yAngle, setYAngle] = useState(40);
-  const [height, setHeight]= useState(2.5);
-  const point=(Points(height,RstatStereoLow));
+  const [height, setHeight]= useState();
+  const [checked, setChecked] = useState(false);
+  const [minHeight, setMinHeight]=useState();
+  const [point, setPoint]=useState(Points(height,device, zoom));
+  useEffect(()=>{
+  for (const currentHeight of minHeights){
+    if (currentHeight.device===device){
+      // console.log(currentHeight);
+      // console.log(device);
+      setMinHeight(currentHeight.min);
+      setHeight(currentHeight.min);
+    }
+  }
+}, [device, minHeight])
+useEffect(()=>{
+  setPoint(Points(height,device, zoom));
+}, [device, zoom, height])
+
+  
+  // console.log(device);
+
   const handleChangeDevice = (event) => {
     setDevice(event.target.value);
+    if (event.target.value=='3D RF' || event.target.value=='Xovis PC2S' || event.target.value=='Xovis PC3' || event.target.value=='RStat RealStereo Low' || event.target.value=='RStat RealStereo от 5.21'){
+      document.getElementById('CaptureZoom').style.display='none';
+    }
+    else{
+      document.getElementById('CaptureZoom').style.display='block';
+    }
   };
-
   const handleChangeZoom = (event) => {
     setZoom(event.target.value);
   };
@@ -45,7 +108,7 @@ function App() {
   };
     const handleChangeHeight = (event) => {
     setHeight(event.target.value);
-  };
+  };  
   const marks = [
     {value: 0,label: '|',},
     {value: 5,label: '|',},
@@ -86,8 +149,8 @@ function App() {
      options={devices}
      width={'210px'}/>
         </div>
-        <div className='container__param'>
-        <label htmlFor='zoom' className='content__label'><b>CaptureZoom</b></label>
+        <div className='container__param' id='CaptureZoom'>
+        <label htmlFor='zoom' className='content__label' ><b>CaptureZoom</b></label>
       <SelectRed 
         value={zoom}
         handle={handleChangeZoom}
@@ -100,7 +163,8 @@ function App() {
         <FormControl fullWidth>
           {/* <input type='number' id='height' className="params__height__input" step={0.1} min={2.5} onChange={handleChangeHeight} value={height}></input> */}
         </FormControl>
-         <InputNumber inputId="minmax-buttons" value={height} onValueChange={handleChangeHeight} mode="decimal" showButtons min={2.5} max={3.5} step={0.1}/>
+        <div className="card flex justify-content-center"> <InputNumber style={{}} inputId="minmax-buttons" value={height} onValueChange={handleChangeHeight} mode="decimal" showButtons step={0.1}/></div>
+        
         </div>
                 <div className="container__param">
          <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 }, 

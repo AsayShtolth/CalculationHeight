@@ -11,7 +11,7 @@ const Chart = (props) => {
 			{				
 				canvas.width=350;
 			}
-		let newScale=canvas.width/(props.widthDevice*10+3);
+		let newScale=canvas.width/(props.widthDevice*10+1);
 		// console.log('height '+canvas.height/(props.height*10+5));
 		// console.log('width '+canvas.width/(props.widthDevice*10+5))
 		if(newScale>=canvas.height/(props.height*10*2+3)){
@@ -85,7 +85,7 @@ ctx.beginPath();
       };
       ctx.drawImage(image, (props.left*10*scale)-52/2+scale, props.height*10*scale+scale-30/2);
 	//   красный квадрат
-	console.log(props.height);
+	// console.log(props.height);
 	ctx.beginPath();
 	ctx.lineWidth = '1';
 	ctx.setLineDash([0, 0]);
@@ -106,9 +106,8 @@ ctx.beginPath();
 	ctx.moveTo(props.left*10*scale+scale, props.height*10*scale+scale);
 	ctx.lineTo(props.widthDevice*10*scale+scale, props.height*10*scale*2+scale);
 	ctx.moveTo(props.left*10*scale+scale, props.height*10*scale+scale);
-	// ctx.lineTo(scale, 280);
 	ctx.moveTo(props.left*10*scale+ scale, props.height*10*scale+scale);
-	ctx.lineTo(scale,props.height*10*scale*2);
+	ctx.lineTo(scale,props.height*10*scale*2+scale);
 	ctx.stroke();
 	ctx.closePath();
         }

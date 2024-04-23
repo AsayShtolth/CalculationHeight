@@ -40,6 +40,37 @@
   background-color: #FFFFFF !important;
   color: #33333380 !important;
 }
+.MuiButtonBase-root-MuiCheckbox-root{
+  color : #3333334D !important;
+}
+.MuiTouchRipple-root{
+  color: #3333334D !important;
+}
+
+input[type="checkbox" ]{
+border: 1px solid #3333334D !important;
+}
+.p-inputnumber-input{
+  width: 45px;
+  height: 28px;
+  border: 1px solid #3333334D;
+  border-right: none;
+}
+.p-inputnumber-buttons-stacked{
+  height: 28px;
+}
+.p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-up{
+  border: 1px solid #3333334D;
+  border-left: none;
+  border-bottom: none;
+  background-color: white;
+}
+.p-inputnumber-buttons-stacked .p-button.p-inputnumber-button-down{
+  border: 1px solid #3333334D;
+  border-left: none;
+  border-top: none;
+  background-color: white;
+}
 .result__param{
   width: 48px;
    height: 20px ; 
