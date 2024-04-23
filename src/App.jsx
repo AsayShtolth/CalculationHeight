@@ -70,7 +70,7 @@ function App() {
   const [height, setHeight]= useState();
   const [checked, setChecked] = useState(false);
   const [minHeight, setMinHeight]=useState();
-  const [point, setPoint]=useState(Points(height,device, zoom));
+  const [point, setPoint]=useState(Points(height,device, zoom, xAngle-40, yAngle-40));
   useEffect(()=>{
   for (const currentHeight of minHeights){
     if (currentHeight.device===device){

@@ -1,4 +1,7 @@
-export function Points(height, device, zoom){
+// fylh
+export function Points(height, device, zoom, xAngle, yAngle){
+	console.log('xAngle - '+xAngle);
+	console.log('yAngle - '+yAngle);
 	const RF3D=[
 		{
 		'id':0,
