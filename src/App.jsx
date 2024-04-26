@@ -68,8 +68,8 @@ function App() {
   const [xAngle, setXAngle] = useState(40);
   const [yAngle, setYAngle] = useState(40);
   const [height, setHeight]= useState();
-  const [checked, setChecked] = useState(false);
   const [minHeight, setMinHeight]=useState();
+  const [maxHeight, setMaxHeight]=useState();
   const [point, setPoint]=useState(Points(height,device, zoom, xAngle-40, yAngle-40));
   useEffect(()=>{
   for (const currentHeight of minHeights){
@@ -77,13 +77,16 @@ function App() {
       // console.log(currentHeight);
       // console.log(device);
       setMinHeight(currentHeight.min);
+      setMaxHeight(currentHeight.max);
       setHeight(currentHeight.min);
     }
   }
 }, [device, minHeight])
 useEffect(()=>{
-  setPoint(Points(height,device, zoom));
-}, [device, zoom, height])
+  setPoint(Points(height,device, zoom,xAngle-40, yAngle-40));
+  // console.log(xAngle+'-xangle ', yAngle+'-yangle')
+  // console.log(point);
+}, [device, zoom, height, xAngle, yAngle])
 
   
   // console.log(device);
@@ -150,7 +153,7 @@ useEffect(()=>{
      width={'210px'}/>
         </div>
         <div className='container__param' id='CaptureZoom'>
-        <label htmlFor='zoom' className='content__label' ><b>CaptureZoom</b></label>
+        <label htmlFor='zoom' className='content__label' ><b>CaptureZoom </b></label>
       <SelectRed 
         value={zoom}
         handle={handleChangeZoom}
@@ -163,14 +166,8 @@ useEffect(()=>{
         <FormControl fullWidth>
           {/* <input type='number' id='height' className="params__height__input" step={0.1} min={2.5} onChange={handleChangeHeight} value={height}></input> */}
         </FormControl>
-        <div className="card flex justify-content-center"> <InputNumber style={{}} inputId="minmax-buttons" value={height} onValueChange={handleChangeHeight} mode="decimal" showButtons step={0.1}/></div>
+        <div className="card flex justify-content-center"> <InputNumber style={{}} inputId="minmax-buttons" value={height} onValueChange={handleChangeHeight} mode="decimal" showButtons step={0.1} min={minHeight} max={maxHeight} /></div>
         
-        </div>
-                <div className="container__param">
-         <FormControlLabel control={<Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 30 }, 
-          '&.Mui-checked': {
-            color: '#FF0000'}
-         }}/>} label="Стены" />
         </div>
         <Box sx={{ width: '100%' }}> 
         <Typography>Наклон камеры X:{xAngle-40}; Y:{yAngle-40}</Typography>

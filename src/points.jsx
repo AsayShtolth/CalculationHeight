@@ -1,7 +1,24 @@
-// fylh
+import { X } from '@mui/icons-material';
+
+//
+const rad=180/Math.PI;
+const rotateX=(y, height, angle)=>{
+	angle=angle*rad;
+	y=y*Math.cos(angle) - height*Math.sin(angle);
+	height=y*Math.sin(angle) - height*Math.cos(angle);
+	console.log('y - '+y);
+	return y;  
+};
+const rotateY=(x, height, angle)=>{
+	angle=angle*rad;
+	x=x*Math.cos(angle) + height*Math.sin(angle);
+	height=-x*Math.sin(angle) + height*Math.cos(angle);
+	console.log('x - '+x);
+	return x;  
+};
 export function Points(height, device, zoom, xAngle, yAngle){
-	console.log('xAngle - '+xAngle);
-	console.log('yAngle - '+yAngle);
+	// console.log('xAngle - '+xAngle);
+	// console.log('yAngle - '+yAngle);
 	const RF3D=[
 		{
 		'id':0,
@@ -391,6 +408,7 @@ const Rstat2DLight4CaptureZoom10 =[
         break;
 
     }
+
 	// console.log(pointsTable);
 	let sizeX=0;
 	let sizeY=0;
@@ -403,6 +421,10 @@ const Rstat2DLight4CaptureZoom10 =[
 			sizeX=point.X/2;
 			sizeY=point.Y/2;
 			// console.log(sizeX);
+				// Делаем поворот 
+	sizeY=rotateX(sizeY, height, xAngle);
+	sizeX=rotateY(sizeX, height, yAngle);
+	console.log(sizeX+'-x, '+sizeY+'-y')
 			return {'x':sizeX, 'y':sizeY}
 		}		
 	}
@@ -419,17 +441,15 @@ const Rstat2DLight4CaptureZoom10 =[
 				let a = (height- oldPoint.height)
 				sizeX=((oldPoint.X+((a*deltaX)/deltaH))/2).toFixed(2);
 				sizeY=((oldPoint.Y+((a*deltaY)/deltaH))/2).toFixed(2);
-				}
-					
-				
-			
-				
-				
+				}				
 			}
 				oldPoint=point;
 		}
 		
 	}
+	// Делаем поворот 
+	sizeY=rotateX(sizeY, height, xAngle);
+	sizeX=rotateY(sizeX, height, yAngle);
 	console.log(sizeX+'-x, '+sizeY+'-y')
 	return {'x':sizeX, 'y':sizeY};
 }
