@@ -376,7 +376,6 @@ const Rstat2DLight4CaptureZoom10 =[
 	switch(device){
 		case '3D RF':
         pointsTable=RF3D;
-		RstatStereo521
         break;
 		case 'RStat RealStereo от 5.21':
         pointsTable=RstatStereo521;
